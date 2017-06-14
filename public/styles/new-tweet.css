@@ -20,3 +20,7 @@ font-style: italic;
 float: right;
 font-size: 12px;
 }
+
+.red {
+  color: red;
+}

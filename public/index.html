@@ -11,15 +11,18 @@
     <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
     <link rel="stylesheet" href="/styles/new-tweet.css" type="text/css" />
+    <link rel="stylesheet" href="/styles/view-tweet.css" type="text/css" />
 
     <!-- External Font -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,700,700i" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- External JS -->
     <script type="text/javascript" src="/vendor/jquery-2.2.3.min.js"></script>
 
     <!-- App JS -->
     <script type="text/javascript" src="/scripts/app.js"></script>
+    <script type="text/javascript" src="/scripts/composer-char-counter.js"></script>
 
   </head>
 
@@ -41,6 +44,31 @@
           <span class="counter">140</span>
         </form>
       </section>
+<br>
+<br>
+<br>
+<br>
+<br>
+      <article class="tweet">
+        <header>
+          Usericon.png [Name]
+          <div id="userid" class="floatright">
+            [@User]
+          </div>
+        </header>
+        <div class="tweetbody">
+        This is the tweetbody
+        </div>
+        <footer>
+          Timestamp
+          <div id="icons" class="floatright">
+            <i class="fa fa-heart fa-lg"></i>
+            <i class="fa fa-retweet fa-lg"></i>
+            <i class="fa fa-flag fa-lg"></i>
+          </div>
+        </footer>
+      </article>
+
     </main>
 
   </body>

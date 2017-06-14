@@ -1,0 +1,52 @@
+.tweet {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+.tweet:hover header {
+  transition: all 0.5s ease;
+  background-color: #cacaca;
+  font-weight: bold;
+}
+
+.tweet:hover .tweetbody {
+  transition: all 1.0s ease;
+  font-size: 18px
+}
+
+.tweet:hover #icons {
+  transition: all 0.7s ease;
+  opacity: 1.0;
+}
+
+.tweet header {
+  padding: 12px 5px;
+  background-color: #eee;
+  border-radius: 10px 10px 0 0;
+  transition: all 0.5s ease;
+}
+
+.tweet .tweetbody {
+  padding: 15px 5px;
+  transition: all 0.5s ease;
+}
+
+
+.tweet footer {
+  padding: 10px 5px;
+  border-top: 1px solid #eee;
+  font-size: 10px;
+}
+
+.floatright {
+   float: right;
+}
+
+#icons {
+  opacity: 0.2;
+  transition: all 0.5s ease;
+}
+
+#icons i {
+  padding: 0 4px;
+}
