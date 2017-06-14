@@ -1,20 +1,20 @@
 .tweet {
   border: 1px solid black;
   border-radius: 10px;
+  margin: 20px 0;
 }
 
 .tweet:hover header {
-  transition: all 0.5s ease;
+  transition: all 0.7s ease;
   background-color: #cacaca;
   font-weight: bold;
 }
 
 .tweet:hover .tweetbody {
-  transition: all 1.0s ease;
-  font-size: 18px
+  transition: all 0.7s ease;
 }
 
-.tweet:hover #icons {
+.tweet:hover .icons {
   transition: all 0.7s ease;
   opacity: 1.0;
 }
@@ -24,6 +24,11 @@
   background-color: #eee;
   border-radius: 10px 10px 0 0;
   transition: all 0.5s ease;
+}
+
+.usersname {
+  vertical-align: top;
+  padding-left: 10px;
 }
 
 .tweet .tweetbody {
@@ -42,11 +47,15 @@
    float: right;
 }
 
-#icons {
+.floatleft {
+   float: left;
+}
+
+.icons {
   opacity: 0.2;
   transition: all 0.5s ease;
 }
 
-#icons i {
+.icons i {
   padding: 0 4px;
 }
