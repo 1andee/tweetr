@@ -22,3 +22,14 @@
   font-size: 40px;
   color: #e8fdff;
 }
+
+#nav-bar .compose {
+  padding: 15px 50px 0;
+}
+
+.compose button {
+  width: 150px;
+  height: 50px;
+  background-color: white;
+  font-size: 20px;
+}
