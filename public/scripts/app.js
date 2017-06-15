@@ -6,16 +6,21 @@
 
 $(document).ready(function () {
 
-  // Test code. Eventually will get this from the server.
-  var tweetData = {
-  }
 
   // handle the new tweets
-  $(".new-tweet").on("submit", function(event) {
+  let form = $(".new-tweet form");
+  form.on("submit", (event) => {
     event.preventDefault();
-    $(this).serialize();
-  })
-
+    $.post({
+      url: '/tweets',
+      datatype: 'json',
+      data: form.serialize(),
+      success: () => {
+        loadTweets(renderTweets)
+      },
+      fail: handleError('postNewTweet')
+    })
+  });
 
   /**
   @description: error handler
@@ -33,7 +38,6 @@ $(document).ready(function () {
   @params:
           cb for when tweets are loaded
   */
-
   const loadTweets = (cb) => {
     $.getJSON({
       url: '/tweets',
@@ -44,6 +48,16 @@ $(document).ready(function () {
     })
   }
 
+  /**
+  @description: uses createTextNode() for XSS prevention
+  @params:
+          string
+  */
+  const escape = (str) => {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
 
   // @description: converts each tweet into HTML string and appends to page
   const renderTweets = (data) => {
@@ -63,7 +77,7 @@ $(document).ready(function () {
             </span>
           </header>
           <div class="tweetbody">
-            ${tweet.content.text}
+            ${escape(tweet.content.text)}
           </div>
             <footer>
               <span class="whatevs">
