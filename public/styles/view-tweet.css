@@ -6,7 +6,7 @@
 
 .tweet:hover header {
   transition: all 0.7s ease;
-  background-color: #cacaca;
+  background-color: rgba(0, 139, 160, 0.48);
   font-weight: bold;
 }
 
@@ -52,7 +52,7 @@
 }
 
 .icons {
-  opacity: 0.2;
+  opacity: 0.0;
   transition: all 0.5s ease;
 }
 
