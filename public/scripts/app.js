@@ -7,10 +7,11 @@
 $(document).ready(function () {
   let tweet_load_counter = 0;
 
+  // slider for compose button
   $(".compose").on("click", () => {
   $(".new-tweet").slideToggle();
   $(".new-tweet textarea").focus();
-})
+  })
 
   // handle the new tweets
   let form = $(".new-tweet form");
@@ -47,7 +48,7 @@ $(document).ready(function () {
   /**
   @description: error handler
   @params:
-          method and error in question
+          method and error
   */
   const handleError = (method) => {
     return (err) => {
@@ -75,7 +76,7 @@ $(document).ready(function () {
   }
 
   /**
-  @description: uses createTextNode() for XSS prevention
+  @description: applies createTextNode() to new tweets for XSS prevention
   @params:
           string
   */
@@ -122,7 +123,5 @@ $(document).ready(function () {
 
   // on page load
   loadTweets(renderTweets);
-
-  // eventually, add a click listener (handler) to load more content on('click')
 
 });
