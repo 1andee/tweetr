@@ -39,6 +39,9 @@ $(document).ready(function () {
         data: form.serialize(),
         success: () => {
           loadTweets(renderTweets)
+          $(".new-tweet textarea").val('').blur();
+          $(".counter").html(`<span class="counter">140</span>`);
+          // setTimeout(() => $(".new-tweet").slideToggle(), 1000);
         },
         fail: handleError('postNewTweet')
       })
