@@ -11,15 +11,31 @@ $(document).ready(function () {
   let form = $(".new-tweet form");
   form.on("submit", (event) => {
     event.preventDefault();
-    $.post({
-      url: '/tweets',
-      datatype: 'json',
-      data: form.serialize(),
-      success: () => {
-        loadTweets(renderTweets)
-      },
-      fail: handleError('postNewTweet')
-    })
+
+    let userText = form.serialize().substring(5);
+    if (!userText) {
+      let response = `<span class="warning">Say something!</span>`
+      $(".warning").html(response);
+      return;
+    } else if (userText.length > 140) {
+      let response = `<span class="warning">You said too much!</span>`
+      $(".warning").html(response);
+      return;
+    }
+    else {
+      let response = `<span class="warning"></span>`
+      $(".warning").html(response);
+
+      $.post({
+        url: '/tweets',
+        datatype: 'json',
+        data: form.serialize(),
+        success: () => {
+          loadTweets(renderTweets)
+        },
+        fail: handleError('postNewTweet')
+      })
+    }
   });
 
   /**

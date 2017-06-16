@@ -24,3 +24,8 @@ font-size: 12px;
 .red {
   color: red;
 }
+
+.new-tweet .warning {
+  padding: 10px 0 0 6px;
+  color: red;
+}
