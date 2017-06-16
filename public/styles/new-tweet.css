@@ -1,6 +1,7 @@
 .new-tweet {
   border: 5px;
   border-radius: 10px;
+  margin-top: 10px;
   /*background-color: #eee;*/
   border: 1px solid black;
   padding: 0 10px 10px;
@@ -8,7 +9,7 @@
 }
 
 .new-tweet h2 {
-  padding: 10px 0 3px 0;
+  padding: 0 0 3px 0;
   border-bottom: 1px solid black;
 }
 
@@ -16,7 +17,9 @@
   width: 100%;
   padding: 3px 3px;
   border-radius: 4px;
+  margin-bottom: 5px;
 }
+
 .counter {
 font-style: italic;
 float: right;
