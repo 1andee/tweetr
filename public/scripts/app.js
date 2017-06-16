@@ -7,6 +7,11 @@
 $(document).ready(function () {
   let tweet_load_counter = 0;
 
+  $(".compose").on("click", () => {
+  $(".new-tweet").slideToggle();
+  $(".new-tweet textarea").focus();
+})
+
   // handle the new tweets
   let form = $(".new-tweet form");
   form.on("submit", (event) => {
@@ -32,7 +37,7 @@ $(document).ready(function () {
         datatype: 'json',
         data: form.serialize(),
         success: () => {
-          $("#tweetList").prepend(newTweet)
+          loadTweets(renderTweets)
         },
         fail: handleError('postNewTweet')
       })
@@ -112,7 +117,7 @@ $(document).ready(function () {
             </footer>
         </article>`
     })
-    $("#tweetList").append(tweet_feed.join(''));
+    $("#tweetList").prepend(tweet_feed.join(''));
   }
 
   // on page load
