@@ -5,7 +5,7 @@
 */
 
 $(document).ready(function () {
-
+  let tweet_load_counter = 0;
 
   // handle the new tweets
   let form = $(".new-tweet form");
@@ -25,13 +25,14 @@ $(document).ready(function () {
     else {
       let response = `<span class="warning"></span>`
       $(".warning").html(response);
+      let newTweet = form.serialize();
 
       $.post({
         url: '/tweets',
         datatype: 'json',
         data: form.serialize(),
         success: () => {
-          loadTweets(renderTweets)
+          $("#tweetList").prepend(newTweet)
         },
         fail: handleError('postNewTweet')
       })
@@ -57,8 +58,12 @@ $(document).ready(function () {
   const loadTweets = (cb) => {
     $.getJSON({
       url: '/tweets',
+      data: {
+        skip: tweet_load_counter
+      },
       success: (response) => {
-        cb(response);
+        tweet_load_counter += response.length;
+        cb(response.reverse());
       },
       fail: handleError('loadTweets')
     })

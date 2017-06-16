@@ -25,6 +25,7 @@
 
 #nav-bar .compose {
   padding: 15px 50px 0;
+  opacity: 0.9;
 }
 
 .compose button {
