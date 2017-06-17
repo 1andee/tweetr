@@ -22,7 +22,7 @@ $(document).ready(function () {
       $(".warning").html(response);
       return;
     } else if (userText.length > 140) {
-      let response = `<span class="warning">You said too much!</span>`
+      let response = `<span class="warning">Brevity is the soul of wit</span>`
       $(".warning").html(response);
       return;
     }
@@ -36,6 +36,7 @@ $(document).ready(function () {
         datatype: 'json',
         data: form.serialize(),
         success: () => {
+          $("#tweetList").children().remove();
           loadTweets(renderTweets)
           $(".new-tweet textarea").val('').blur();
           $(".counter").html(`<span class="counter">140</span>`);
