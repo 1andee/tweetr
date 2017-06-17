@@ -3,14 +3,25 @@ $(document).ready(function () {
 
   // slider for compose button
   $(".compose").on("click", () => {
-  $(".new-tweet").slideToggle();
-  $(".new-tweet textarea").focus();
+    $(".new-tweet").slideToggle();
+    $(".new-tweet textarea").focus();
   })
+
+  /**
+  @description: error handler
+  @params:
+  method and error
+  */
+  const handleError = (method) => {
+    return (err) => {
+      console.debug(method, err);
+    }
+  }
 
   /**
   @description: posts new tweets from compose box (.new-tweet)
   @params:
-          form data
+  form data
   */
   let form = $(".new-tweet form");
   form.on("submit", (event) => {
@@ -35,42 +46,26 @@ $(document).ready(function () {
         url: '/tweets',
         datatype: 'json',
         data: form.serialize(),
-        success: () => {
-          $("#tweetList").children().remove();
-          loadTweets(renderTweets)
+        success: (data) => {
           $(".new-tweet textarea").val('').blur();
           $(".counter").html(`<span class="counter">140</span>`);
-          // setTimeout(() => $(".new-tweet").slideToggle(), 1000);
+          $("#tweetList").prepend(renderTweets(data));
         },
         fail: handleError('postNewTweet')
       })
     }
   });
 
-  /**
-  @description: error handler
-  @params:
-          method and error
-  */
-  const handleError = (method) => {
-    return (err) => {
-      console.debug(method, err);
-    }
-  }
 
   /**
   @description: fetches tweets from http://localhost:8080/tweets
   @params:
-          cb for when tweets are loaded
+  cb for when tweets are loaded
   */
   const loadTweets = (cb) => {
     $.getJSON({
       url: '/tweets',
-      data: {
-        skip: tweet_load_counter
-      },
       success: (response) => {
-        tweet_load_counter += response.length;
         cb(response.reverse());
       },
       fail: handleError('loadTweets')
@@ -80,7 +75,7 @@ $(document).ready(function () {
   /**
   @description: applies createTextNode() to new tweets for XSS prevention
   @params:
-          string
+  string
   */
   const escape = (str) => {
     var div = document.createElement('div');
@@ -88,42 +83,48 @@ $(document).ready(function () {
     return div.innerHTML;
   }
 
-  // @description: converts each tweet into HTML string and appends to page
-  const renderTweets = (data) => {
+  // @description: renders all existing tweets in DB and injects them to page
+  const renderAllTweets = (data) => {
     const tweet_feed = data.map((tweet) => {
-      var timeElapsed = Math.floor((Date.now() - tweet.created_at)/(1000*60*60*24));
-      return `
-        <article class="tweet">
-          <header>
-              <span class="usericon">
-              <img src="${tweet.user.avatars.small}">
-              </span>
-            <span class="usersname">
-              ${tweet.user.name}
-            </span>
-            <span class="userid floatright">
-              ${tweet.user.handle}
-            </span>
-          </header>
-          <div class="tweetbody">
-            ${escape(tweet.content.text)}
-          </div>
-            <footer>
-              <span class="whatevs">
-                ${timeElapsed} days ago
-              </span>
-              <span class="icons floatright">
-                <i class="fa fa-heart fa-lg"></i>
-                <i class="fa fa-retweet fa-lg"></i>
-                <i class="fa fa-flag fa-lg"></i>
-              </span>
-            </footer>
-        </article>`
+      return renderTweets(tweet);
     })
     $("#tweetList").prepend(tweet_feed.join(''));
   }
 
+  // @description: converts a single tweet into HTML string
+  const renderTweets = (tweet) => {
+    var timeElapsed = Math.floor((Date.now() - tweet.created_at)/(1000*60*60*24));
+    return `
+    <article class="tweet">
+    <header>
+      <span class="usericon">
+        <img src="${tweet.user.avatars.small}">
+      </span>
+      <span class="usersname">
+        ${tweet.user.name}
+      </span>
+      <span class="userid floatright">
+        ${tweet.user.handle}
+      </span>
+    </header>
+    <div class="tweetbody">
+      ${escape(tweet.content.text)}
+    </div>
+    <footer>
+      <span class="whatevs">
+        ${timeElapsed} days ago
+      </span>
+      <span class="icons floatright">
+        <i class="fa fa-heart fa-lg"></i>
+        <i class="fa fa-retweet fa-lg"></i>
+        <i class="fa fa-flag fa-lg"></i>
+      </span>
+    </footer>
+    </article>`
+  }
+
+
   // on page load
-  loadTweets(renderTweets);
+  loadTweets(renderAllTweets);
 
 });
