@@ -1,5 +1,4 @@
 $(document).ready(function () {
-  let tweet_load_counter = 0;
 
   // slider for compose button
   $(".compose").on("click", () => {
@@ -9,8 +8,7 @@ $(document).ready(function () {
 
   /**
   @description: error handler
-  @params:
-  method and error
+  @params: method and error
   */
   const handleError = (method) => {
     return (err) => {
@@ -20,8 +18,7 @@ $(document).ready(function () {
 
   /**
   @description: posts new tweets from compose box (.new-tweet)
-  @params:
-  form data
+  @params: form data
   */
   let form = $(".new-tweet form");
   form.on("submit", (event) => {
@@ -59,8 +56,7 @@ $(document).ready(function () {
 
   /**
   @description: fetches tweets from http://localhost:8080/tweets
-  @params:
-  cb for when tweets are loaded
+  @params: cb for when tweets are loaded
   */
   const loadTweets = (cb) => {
     $.getJSON({
@@ -74,8 +70,7 @@ $(document).ready(function () {
 
   /**
   @description: applies createTextNode() to new tweets for XSS prevention
-  @params:
-  string
+  @params: string (text of new tweet composed by user)
   */
   const escape = (str) => {
     var div = document.createElement('div');
@@ -83,7 +78,10 @@ $(document).ready(function () {
     return div.innerHTML;
   }
 
-  // @description: renders all existing tweets in DB and injects them to page
+  /**
+  @description: renders all existing tweets in DB and injects them to page
+  @params: data
+  */
   const renderAllTweets = (data) => {
     const tweet_feed = data.map((tweet) => {
       return renderTweets(tweet);
@@ -91,9 +89,11 @@ $(document).ready(function () {
     $("#tweetList").prepend(tweet_feed.join(''));
   }
 
-  // @description: converts a single tweet into HTML string
+  /**
+  @description: converts a single tweet into HTML string
+  @params: tweet to format
+  */
   const renderTweets = (tweet) => {
-    var timeElapsed = Math.floor((Date.now() - tweet.created_at)/(1000*60*60*24));
     return `
     <article class="tweet">
     <header>
@@ -112,7 +112,7 @@ $(document).ready(function () {
     </div>
     <footer>
       <span class="whatevs">
-        ${timeElapsed} days ago
+        Posted ${timeElapsed(tweet.created_at)}
       </span>
       <span class="icons floatright">
         <i class="fa fa-heart fa-lg"></i>
@@ -122,7 +122,6 @@ $(document).ready(function () {
     </footer>
     </article>`
   }
-
 
   // on page load
   loadTweets(renderAllTweets);
