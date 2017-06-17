@@ -59,3 +59,11 @@
 .icons i {
   padding: 0 4px;
 }
+
+.icons .fa-heart:hover {
+  color: red;
+}
+
+.icons .fa-retweet:hover {
+  color: green;
+}

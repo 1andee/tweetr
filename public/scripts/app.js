@@ -1,9 +1,3 @@
-/*
-* Client-side JS logic goes here
-* jQuery is already loaded
-* Reminder: Use (and do all your DOM work in) jQuery's document ready function
-*/
-
 $(document).ready(function () {
   let tweet_load_counter = 0;
 
@@ -13,7 +7,11 @@ $(document).ready(function () {
   $(".new-tweet textarea").focus();
   })
 
-  // handle the new tweets
+  /**
+  @description: posts new tweets from compose box (.new-tweet)
+  @params:
+          form data
+  */
   let form = $(".new-tweet form");
   form.on("submit", (event) => {
     event.preventDefault();
