@@ -18,24 +18,15 @@ $(document).ready(function () {
 
   /**
   @description: event handler for new tweets
-  @params: form textarea (when submitted by user)
+  @params: none
   */
   const postNewTweet = () => {
     let form = $(".new-tweet form");
     form.on("submit", (event) => {
       event.preventDefault();
-
       let userText = form.serialize().substring(5);
-      if (!userText) {
-        let response = `<span class="warning">${tooShort()}</span>`
-        $(".warning").html(response);
-        return;
-      } else if (userText.length > 140) {
-        let response = `<span class="warning">${tooLong()}</span>`
-        $(".warning").html(response);
-        return;
-      }
-      else {
+
+      if (lengthChecker(userText) === true) {
         $.post({
           url: '/tweets',
           datatype: 'json',
@@ -48,6 +39,33 @@ $(document).ready(function () {
         })
       }
     })
+  }
+
+  /**
+  @description: checks that a new tweet is the correct length.
+  @params: newtweet
+  */
+  const lengthChecker = (newtweet) => {
+    if (!newtweet) {
+      let response = `<span class="warning">${tooShort()}</span>`
+      $(".warning").html(response);
+      return false;
+    } else if (newtweet.length > 140) {
+      let response = `<span class="warning">${tooLong()}</span>`
+      $(".warning").html(response);
+      return false;
+    }
+    else return true;
+  }
+
+  /**
+  @description: applies createTextNode() to new tweets for XSS prevention
+  @params: string (text of new tweet composed by user)
+  */
+  const escape = (str) => {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
   }
 
   /**
@@ -72,16 +90,6 @@ $(document).ready(function () {
       },
       fail: handleError('loadTweets')
     })
-  }
-
-  /**
-  @description: applies createTextNode() to new tweets for XSS prevention
-  @params: string (text of new tweet composed by user)
-  */
-  const escape = (str) => {
-    var div = document.createElement('div');
-    div.appendChild(document.createTextNode(str));
-    return div.innerHTML;
   }
 
   /**
