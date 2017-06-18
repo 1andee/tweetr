@@ -3,7 +3,7 @@
 Tweeter is a single-page web app built to practice front-end dev skills such as HTML, CSS, JS, jQuery and AJAX. The app is powered behind the scenes by Node, Express and MongoDB.
 
 ## Screenshots
-!["Screenshot of app"](https://github.com/1andee/tweeter/blob/master/docs/index.png)
+!["Screenshot of app"](https://raw.githubusercontent.com/1andee/tweetr/master/docs/index.png)
 
 ## Getting Started
 
