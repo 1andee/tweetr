@@ -26,11 +26,11 @@ $(document).ready(function () {
 
     let userText = form.serialize().substring(5);
     if (!userText) {
-      let response = `<span class="warning">Say something!</span>`
+      let response = `<span class="warning">${tooShort()}</span>`
       $(".warning").html(response);
       return;
     } else if (userText.length > 140) {
-      let response = `<span class="warning">Brevity is the soul of wit</span>`
+      let response = `<span class="warning">${tooLong()}</span>`
       $(".warning").html(response);
       return;
     }
