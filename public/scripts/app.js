@@ -41,11 +41,7 @@ $(document).ready(function () {
           datatype: 'json',
           data: form.serialize(),
           success: (data) => {
-            // Resets compose area and prepends new tweet
-            let response = `<span class="warning"></span>`;
-            $(".warning").html(response);
-            $(".counter").html(`<span class="counter">140</span>`);
-            $(".new-tweet textarea").val('').blur();
+            resetComposeBox();
             $("#tweetList").prepend(renderTweets(data));
           },
           fail: handleError('postNewTweet')
@@ -54,6 +50,15 @@ $(document).ready(function () {
     })
   }
 
+  /**
+  @description: resets the compose (new-tweet) area to default state
+  */
+  const resetComposeBox = () => {
+    let response = `<span class="warning"></span>`;
+    $(".warning").html(response);
+    $(".counter").html(`<span class="counter">140</span>`);
+    $(".new-tweet textarea").val('').blur();
+  }
 
   /**
   @description: fetches tweets from http://localhost:8080/tweets
