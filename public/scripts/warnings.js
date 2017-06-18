@@ -14,7 +14,6 @@ const tooShort = () => {
     "Is anybody out there?",
     "Enter some text!",
     "Well, this is embarassing...",
-    "If you think of something, say it",
     "Penny for your thoughts?"
   ]
   var randomNumber = Math.floor(Math.random()*possibleStrings.length);

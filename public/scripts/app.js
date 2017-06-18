@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  // slider for compose button
+  // slider animation for compose button
   $(".compose").on("click", () => {
     $(".new-tweet").slideToggle();
     $(".new-tweet textarea").focus();
@@ -17,41 +17,42 @@ $(document).ready(function () {
   }
 
   /**
-  @description: posts new tweets from compose box (.new-tweet)
-  @params: form data
+  @description: event handler for new tweets
+  @params: form textarea (when submitted by user)
   */
-  let form = $(".new-tweet form");
-  form.on("submit", (event) => {
-    event.preventDefault();
+  const postNewTweet = () => {
+    let form = $(".new-tweet form");
+    form.on("submit", (event) => {
+      event.preventDefault();
 
-    let userText = form.serialize().substring(5);
-    if (!userText) {
-      let response = `<span class="warning">${tooShort()}</span>`
-      $(".warning").html(response);
-      return;
-    } else if (userText.length > 140) {
-      let response = `<span class="warning">${tooLong()}</span>`
-      $(".warning").html(response);
-      return;
-    }
-    else {
-      let response = `<span class="warning"></span>`
-      $(".warning").html(response);
-      let newTweet = form.serialize();
-
-      $.post({
-        url: '/tweets',
-        datatype: 'json',
-        data: form.serialize(),
-        success: (data) => {
-          $(".new-tweet textarea").val('').blur();
-          $(".counter").html(`<span class="counter">140</span>`);
-          $("#tweetList").prepend(renderTweets(data));
-        },
-        fail: handleError('postNewTweet')
-      })
-    }
-  });
+      let userText = form.serialize().substring(5);
+      if (!userText) {
+        let response = `<span class="warning">${tooShort()}</span>`
+        $(".warning").html(response);
+        return;
+      } else if (userText.length > 140) {
+        let response = `<span class="warning">${tooLong()}</span>`
+        $(".warning").html(response);
+        return;
+      }
+      else {
+        $.post({
+          url: '/tweets',
+          datatype: 'json',
+          data: form.serialize(),
+          success: (data) => {
+            // Resets compose area and prepends new tweet
+            let response = `<span class="warning"></span>`;
+            $(".warning").html(response);
+            $(".counter").html(`<span class="counter">140</span>`);
+            $(".new-tweet textarea").val('').blur();
+            $("#tweetList").prepend(renderTweets(data));
+          },
+          fail: handleError('postNewTweet')
+        })
+      }
+    })
+  }
 
 
   /**
@@ -125,5 +126,5 @@ $(document).ready(function () {
 
   // on page load
   loadTweets(renderAllTweets);
-
+  postNewTweet();
 });
