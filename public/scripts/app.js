@@ -122,10 +122,10 @@ $(document).ready(function () {
       </span>
     </header>
     <div class="tweetbody">
-      ${escape(tweet.content.text)}
+      <span>${escape(tweet.content.text)}</span>
     </div>
     <footer>
-      <span class="whatevs">
+      <span class="timestamp">
         Posted ${timeElapsed(tweet.created_at)}
       </span>
       <span class="icons floatright">
