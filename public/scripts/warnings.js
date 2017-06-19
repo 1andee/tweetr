@@ -16,7 +16,7 @@ const tooShort = () => {
     "Well, this is embarassing...",
     "Penny for your thoughts?"
   ]
-  var randomNumber = Math.floor(Math.random()*possibleStrings.length);
+  let randomNumber = Math.floor(Math.random()*possibleStrings.length);
   return possibleStrings[randomNumber];
 };
 
@@ -27,6 +27,6 @@ const tooLong = () => {
     "Brevity is the soul of wit",
     "Can you summarize that, please?"
   ]
-  var randomNumber = Math.floor(Math.random()*possibleStrings.length);
+  let randomNumber = Math.floor(Math.random()*possibleStrings.length);
   return possibleStrings[randomNumber];
 };
