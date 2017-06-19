@@ -7,9 +7,11 @@ Tweeter is a single-page web app built to practice front-end dev skills such as 
 
 ## Getting Started
 
-From the project directory, install all required dependencies using the `npm install` command in Terminal.
-
-Use the `npm start` command in Terminal to start the server. Once the server is running, type `http://localhost:8080/` in the address bar of your web browser to launch the app.
+1. Fork and clone your fork of this repository.
+2. Install dependencies: `npm install` or `npm i` for short.
+3. Start the web server from the command line: `npm start`
+4. Open the app on `http://localhost:8080/` in your web browser.
+5. Bask in the glory of it's greatness.
 
 ## Dependencies
 
