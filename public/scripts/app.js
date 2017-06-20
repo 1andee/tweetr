@@ -40,6 +40,7 @@ $(document).ready(function () {
       }
     })
   }
+  postNewTweet();
 
   /**
   @description: checks that a new tweet is the correct length.
@@ -92,6 +93,8 @@ $(document).ready(function () {
     })
   }
 
+  loadTweets(renderAllTweets);
+
   /**
   @description: renders all existing tweets in DB and injects them to page
   @params: data
@@ -137,7 +140,4 @@ $(document).ready(function () {
     </article>`
   }
 
-  // on page load
-  loadTweets(renderAllTweets);
-  postNewTweet();
 });
