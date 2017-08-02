@@ -1,9 +1,11 @@
 "use strict";
 
+require('dotenv').config();
+
 const PORT = 8080;
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
-const MONGODB_URI = "mongodb://localhost:27017/tweeter";
+const MONGODB_URI = process.env.MONGODB_URI;
 const bodyParser = require("body-parser");
 
 const app = express();
@@ -20,10 +22,11 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
 
   // Pass in `DataHelpers` object so it can define routes and interact with the data layer.
   const DataHelpers = require("./lib/data-helpers.js")(db);
-  const tweetsRoutes = require("./routes/tweets")(DataHelpers);
+  const tweetsRoutes = require("./routes/tweets.js")(DataHelpers);
 
   // Mount the tweets routes at the "/tweets" path prefix:
   app.use("/tweets", tweetsRoutes);
+
 });
 
 
