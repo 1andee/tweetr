@@ -40,7 +40,6 @@ $(document).ready(function () {
       }
     })
   }
-  postNewTweet();
 
   /**
   @description: checks that a new tweet is the correct length.
@@ -64,7 +63,7 @@ $(document).ready(function () {
   @params: string (text of new tweet composed by user)
   */
   const escape = (str) => {
-    let div = document.createElement('div');
+    var div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   }
@@ -92,8 +91,6 @@ $(document).ready(function () {
       fail: handleError('loadTweets')
     })
   }
-
-  loadTweets(renderAllTweets);
 
   /**
   @description: renders all existing tweets in DB and injects them to page
@@ -140,4 +137,7 @@ $(document).ready(function () {
     </article>`
   }
 
+  // on page load
+  loadTweets(renderAllTweets);
+  postNewTweet();
 });
