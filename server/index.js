@@ -10,11 +10,13 @@ const bodyParser = require("body-parser");
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const randomizer = require("./lib/util/randomizer");
+const flash = require('express-flash');
 var path = require('path');
 
 const app = express();
 app.set('port', (process.env.NODE || 3000))
 app.use(express.static("public"));
+app.use(flash());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -69,35 +71,45 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
 
       db.collection("users").save(user);
       console.log("New user successfully saved")
+      req.flash('success', "Account created.");
       return res.redirect('/');
     });
 
-  app.post("/login", (req, res) => {
-    if (!req.body.email ||
-      !req.body.password) {
-        res.status(400).send('Invalid request: missing data in POST body');
-        return;
-      }
+    app.post("/login", (req, res) => {
+      if (!req.body.email ||
+        !req.body.password) {
+          req.flash('danger', "Please check your username and/or password.");
+          return res.redirect("/login");
+        };
 
-      db.collection("users").findOne({
-       'email': req.body.email
-     }, function(err, user) {
-         if (err) {
-           throw err
-         }
-         if (user) {
-           console.log("user exists")
-         } else {
-           console.log('user doesnt exist')
-         }
-      })
+        db.collection("users").findOne({
+          'email': req.body.email
+        }, function(err, user) {
+          if (err) {
+            throw err
+          }
+          if (user) {
+            console.log("user exists!")
+            if (bcrypt.compareSync(req.body.password, user.password_digest)) {
+              console.log('password matches!');
+              req.session.user_id = user.user_id;
+              return res.redirect('/');
+            } else {
+              console.log("password doesn't match!");
+              req.flash('danger', "Please check your username and/or password.");
+              return res.redirect("/login");
+            }
+          } else {
+            console.log("user doesnt exist!");
+            req.flash('danger', "Please check your username and/or password.");
+            return res.redirect("/login");
+          }
+        });
 
-      //  if (bcrypt.compareSync(password_digest, users[key].req.body.password)) {
-      // req.session.user_id = user_id;
+      });
+
     });
 
-});
-
-app.listen(PORT, () => {
-  console.log("Tweeter app listening on port " + PORT);
-});
+    app.listen(PORT, () => {
+      console.log("Tweeter app listening on port " + PORT);
+    });
