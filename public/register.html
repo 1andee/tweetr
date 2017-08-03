@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- Meta Information -->
-    <title>Tweeter - Home Page</title>
+    <title>Tweeter - Register</title>
 
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
@@ -33,7 +33,6 @@
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png">
       <span class="header">Tweeter</span>
-      <span class="compose floatright"><button value="Compose"><i class="fa fa-pencil-square-o"></i> Compose</span>
       <!-- <span class="floatright"><button value="Login">Login</span> -->
       <!-- <span class="floatright"><button value="Register">Register</span> -->
       <!-- <span class="floatright"><button value="Logout">Logout</span> -->
@@ -41,17 +40,28 @@
 
     <!-- Page-specific (main) content here -->
     <main class="container">
-      <section class="new-tweet">
-        <h2>Compose Tweet</h2>
-        <form action="/tweets" method="POST" >
-          <textarea name="text" rows="3" placeholder="Whatcha thinkin bout?"></textarea>
-          <input type="submit" value="Tweet">
-          <span class="warning"></span>
-          <span class="counter">140</span>
+        <h2>Register</h2>
+        <section class="user-registration">
+        <form action="/register" method="POST" >
+          <label for="handle">Username:</label>
+          <input type="text" style="width: 40%;" id="handle" name="handle" placeholder="@roy"></input>
+          <br>
+          <br>
+          <label for="name">Name:</label>
+          <input type="text" style="width: 40%;" id="name" name="name" placeholder="Roy McRoyerson"></input>
+          <br>
+          <br>
+          <label for="email">Email Address:</label>
+          <input type="text" style="width: 40%;" id="email" name="email" placeholder="roy@royco_roofing.com"></input>
+          <br>
+          <br>
+          <label for="password">Password:</label>
+          <input type="password" style="width: 38%;" id="password" name="password"></input>
+          <br>
+          <br>
+          <input type="submit" value="Register">
         </form>
       </section>
-
-      <section id="tweetList"></section>
 
     </main>
 
