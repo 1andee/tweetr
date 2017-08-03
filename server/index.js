@@ -7,6 +7,8 @@ const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
 const MONGODB_URI = process.env.MONGODB_URI;
 const bodyParser = require("body-parser");
+const cookieSession = require('cookie-session');
+const bcrypt = require('bcrypt');
 
 const app = express();
 app.set('port', (process.env.NODE || 3000))
