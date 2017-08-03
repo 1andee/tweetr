@@ -36,6 +36,10 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   // Mount the tweets routes at the "/tweets" path prefix:
   app.use("/tweets", tweetsRoutes);
 
+  app.get("/login", (req, res) => {
+    res.sendFile(path.resolve(__dirname + '/../public/login.html'));
+  });
+
   app.get("/register", (req, res) => {
     res.sendFile(path.resolve(__dirname + '/../public/register.html'));
   });
@@ -68,8 +72,32 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
       return res.redirect('/');
     });
 
-  });
+  app.post("/login", (req, res) => {
+    if (!req.body.email ||
+      !req.body.password) {
+        res.status(400).send('Invalid request: missing data in POST body');
+        return;
+      }
 
-  app.listen(PORT, () => {
-    console.log("Tweeter app listening on port " + PORT);
-  });
+      db.collection("users").findOne({
+       'email': req.body.email
+     }, function(err, user) {
+         if (err) {
+           throw err
+         }
+         if (user) {
+           console.log("user exists")
+         } else {
+           console.log('user doesnt exist')
+         }
+      })
+
+      //  if (bcrypt.compareSync(password_digest, users[key].req.body.password)) {
+      // req.session.user_id = user_id;
+    });
+
+});
+
+app.listen(PORT, () => {
+  console.log("Tweeter app listening on port " + PORT);
+});
