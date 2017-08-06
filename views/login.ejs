@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <!-- Meta Information -->
-    <title>Tweeter - Home Page</title>
+    <title>Tweeter - Login</title>
 
     <!-- External CSS -->
     <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
@@ -33,7 +33,6 @@
     <nav id="nav-bar">
       <img class="logo" src="/images/bird.png">
       <span class="header">Tweeter</span>
-      <span class="compose floatright"><button value="Compose"><i class="fa fa-pencil-square-o"></i> Compose</span>
       <!-- <span class="floatright"><button value="Login">Login</span> -->
       <!-- <span class="floatright"><button value="Register">Register</span> -->
       <!-- <span class="floatright"><button value="Logout">Logout</span> -->
@@ -41,17 +40,30 @@
 
     <!-- Page-specific (main) content here -->
     <main class="container">
-      <section class="new-tweet">
-        <h2>Compose Tweet</h2>
-        <form action="/tweets" method="POST" >
-          <textarea name="text" rows="3" placeholder="Whatcha thinkin bout?"></textarea>
-          <input type="submit" value="Tweet">
-          <span class="warning"></span>
-          <span class="counter">140</span>
+
+        <h2>Login</h2>
+        <% if (messages) { %>
+          <% for (key in messages) { %>
+            <div class="alert alert-<%= [key] %>">
+              <span style="color: black; border-size: 3px; border-color: black;"><%= messages[key] %></span>
+            </div>
+            <% } %>
+            <br>
+        <% } %>
+
+        <section class="user-login">
+        <form action="/login" method="POST" >
+          <label for="email">Email Address:</label>
+          <input type="text" style="width: 40%;" id="email" name="email" placeholder="roy@royco_roofing.com"></input>
+          <br>
+          <br>
+          <label for="password">Password:</label>
+          <input type="password" style="width: 38%;" id="password" name="password"></input>
+          <br>
+          <br>
+          <input type="submit" value="Login">
         </form>
       </section>
-
-      <section id="tweetList"></section>
 
     </main>
 

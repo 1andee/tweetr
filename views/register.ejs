@@ -41,6 +41,15 @@
     <!-- Page-specific (main) content here -->
     <main class="container">
         <h2>Register</h2>
+        <% if (messages) { %>
+          <% for (key in messages) { %>
+            <div class="alert alert-<%= [key] %>">
+              <span style="color: black; border-size: 3px; border-color: black;"><%= messages[key] %></span>
+            </div>
+            <% } %>
+            <br>
+        <% } %>
+        
         <section class="user-registration">
         <form action="/register" method="POST" >
           <label for="handle">Username:</label>

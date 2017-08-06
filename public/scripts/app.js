@@ -1,5 +1,25 @@
 $(document).ready(function () {
 
+
+  // /**
+  // @description: checks to see if user is logged in
+  // */
+  // const userLoginState = () => {
+  //   if (!req.session.user_id) {
+  //     let response = $("#navbar").append(renderLoginButtons());
+  //   }
+  // }
+  //
+  // /**
+  // @description: renders buttons if user is not logged in
+  // */
+  // const renderLoginButtons = () => {
+  //   return `
+  //   <span class="floatright"><button value="Login">Login</span>
+  //   <span class="floatright"><button value="Register">Register</span>`
+  //   // <span class="floatright"><button value="Logout">Logout</span>
+  // }
+
   // slider animation for compose button
   $(".compose").on("click", () => {
     $(".new-tweet").slideToggle();
