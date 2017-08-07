@@ -26,6 +26,10 @@
   transition: all 0.5s ease;
 }
 
+.tweet header img {
+  width: 50px;
+}
+
 .usersname {
   vertical-align: top;
   padding-left: 10px;
