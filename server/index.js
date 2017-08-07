@@ -49,17 +49,27 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   });
 
   app.get("/login", (req, res) => {
-    let templateVars = {
-      user: req.session.user
+    let user = req.session.user;
+    if (user) {
+      res.redirect('/');
+    } else {
+      let templateVars = {
+        user: user
+      };
+      res.render("login", templateVars)
     };
-    res.render("login", templateVars)
   });
 
   app.get("/register", (req, res) => {
-    let templateVars = {
-      user: req.session.user
+    let user = req.session.user;
+    if (user) {
+      res.redirect('/');
+    } else {
+      let templateVars = {
+        user: user
+      };
+      res.render("register", templateVars)
     };
-    res.render("register", templateVars)
   });
 
 });
