@@ -21,7 +21,7 @@ $(document).ready(function () {
   // }
 
   // slider animation for compose button
-  $(".compose").on("click", () => {
+  $("#compose").on("click", () => {
     $(".new-tweet").slideToggle();
     $(".new-tweet textarea").focus();
   })
@@ -106,6 +106,7 @@ $(document).ready(function () {
     $.getJSON({
       url: '/tweets',
       success: (response) => {
+        // Sorts all tweets in reverse chronological order
         cb(response.reverse());
       },
       fail: handleError('loadTweets')

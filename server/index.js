@@ -40,19 +40,27 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   app.use("/tweets", tweetsRoutes);
 
   app.get("/", (req, res) => {
-    var user_id = req.session.user_id;
+    var user = req.session.user;
     let templateVars = {
-      user_id
+      user
     };
     res.render("index", templateVars);
   });
 
   app.get("/login", (req, res) => {
-    res.render("login")
+    var user = req.session.user;
+    let templateVars = {
+      user
+    };
+    res.render("login", templateVars)
   });
 
   app.get("/register", (req, res) => {
-    res.render("register")
+    var user = req.session.user;
+    let templateVars = {
+      user
+    };
+    res.render("register", templateVars)
   });
 
   app.get("/logout", (req, res) => {
@@ -65,22 +73,25 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
       !req.body.name   ||
       !req.body.email  ||
       !req.body.password) {
+        // Registration fields were left blank
         req.flash('danger', "Please complete all form fields.");
         return res.redirect("/register");
       }
 
-      let user_id = randomizer();
-
       const user = {
-        user_id: user_id,
         handle: req.body.handle,
         name: req.body.name,
         email: req.body.email,
         password_digest: bcrypt.hashSync(req.body.password, 10),
+        avatars: {
+          small: req.body.avatar,
+          regular: '',
+          large: ''
+        },
         created_at: Date.now()
       };
 
-      req.session.user_id = user_id;
+      req.session.user = user;
 
       db.collection("users").save(user);
       console.log(`New user successfully saved:\n${user}`)
@@ -88,28 +99,28 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
     });
 
     app.post("/login", (req, res) => {
-      if (!req.body.email ||
+      if (!req.body.handle ||
         !req.body.password) {
-          // Username or password field was blank.
+          // Username or password field was blank
           req.flash('danger', "Please check your username and/or password.");
           return res.redirect("/login");
         };
 
-        // User lookup by email
+        // Lookup user by email
         db.collection("users").findOne({
-          'email': req.body.email
+          'handle': req.body.handle
         }, ((err, user)=> {
           if (err) {
             throw err
           }
           if (user) {
-            console.log("user exists!")
+            // User found in database
             if (bcrypt.compareSync(req.body.password, user.password_digest)) {
-              // Password matches.
-              req.session.user_id = user.user_id;
+              // Password matches
+              req.session.user = user;
               return res.redirect('/');
             } else {
-              // Password doesn't match.
+              // Password doesn't match
               req.flash('danger', "Please check your username and/or password.");
               return res.redirect("/login");
             }
