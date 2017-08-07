@@ -9,7 +9,6 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const bodyParser = require("body-parser");
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
-const randomizer = require("./lib/util/randomizer");
 const flash = require('express-flash');
 var path = require('path');
 
@@ -102,7 +101,7 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
       req.session.user = user;
 
       db.collection("users").save(user);
-      return res.redirect('/');
+       return res.redirect('/');
     });
 
     app.post("/login", (req, res) => {
