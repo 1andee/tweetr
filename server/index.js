@@ -36,6 +36,9 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   const DataHelpers = require("./lib/data-helpers.js")(db);
   const tweetsRoutes = require("./routes/tweets.js")(DataHelpers);
 
+  // Pass in `UserHelpers` object to generate random avatars
+  const userHelper = require("./lib/util/user-helper")
+
   // Mount the tweets routes at the "/tweets" path prefix:
   app.use("/tweets", tweetsRoutes);
 
@@ -78,13 +81,18 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
         return res.redirect("/register");
       }
 
+      let prefix = "@";
+      let userHandle = req.body.handle;
+      let cleanHandle = userHandle.replace("@", "");
+      let handle = prefix += cleanHandle;
+
       const user = {
-        handle: req.body.handle,
+        handle: handle,
         name: req.body.name,
         email: req.body.email,
         password_digest: bcrypt.hashSync(req.body.password, 10),
         avatars: {
-          small: req.body.avatar,
+          small: req.body.avatar ? req.body.avatar : userHelper.generateRandomAvatar(),
           regular: '',
           large: ''
         },
@@ -94,7 +102,6 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
       req.session.user = user;
 
       db.collection("users").save(user);
-      console.log(`New user successfully saved:\n${user}`)
       return res.redirect('/');
     });
 

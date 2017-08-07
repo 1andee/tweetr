@@ -39,5 +39,17 @@ module.exports = {
       handle: userHandle,
       avatars: avatars
     };
+  },
+
+  generateRandomAvatar: () => {
+    const firstName = chance.first();
+    const lastName  = chance.last();
+    const userHandle  = firstName + lastName;
+
+    const avatarUrlPrefix = `https://vanillicon.com/${md5(userHandle)}`;
+    const avatar = `${avatarUrlPrefix}_50.png`;
+
+    return avatar
   }
+
 };
