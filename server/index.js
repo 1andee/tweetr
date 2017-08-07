@@ -112,9 +112,11 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
           return res.redirect("/login");
         };
 
+        let handle = `@${req.body.handle}`;
+
         // Lookup user by email
         db.collection("users").findOne({
-          'handle': req.body.handle
+          'handle': handle
         }, ((err, user)=> {
           if (err) {
             throw err
