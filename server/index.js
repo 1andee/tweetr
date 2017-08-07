@@ -76,7 +76,7 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
       !req.body.email  ||
       !req.body.password) {
         // Registration fields were left blank
-        req.flash('danger', "Please complete all form fields.");
+        req.flash('danger', "Please complete all required fields.");
         return res.redirect("/register");
       }
 

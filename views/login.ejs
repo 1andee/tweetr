@@ -13,8 +13,8 @@
         <h2>Login</h2>
         <% if (messages) { %>
           <% for (key in messages) { %>
-            <div class="alert alert-<%= [key] %>">
-              <span style="color: black; border-size: 3px; border-color: black;"><%= messages[key] %></span>
+            <div class="alert-<%= [key] %>">
+              <span><%= messages[key] %></span>
             </div>
             <% } %>
             <br>
@@ -22,12 +22,14 @@
 
         <section class="user-login">
         <form action="/login" method="POST" >
-          <label for="handle">Username:</label>
-          <input type="text" style="width: 40%;" id="handle" name="handle" placeholder="roy"></input>
+          <label for="handle">Username</label>
+          <br>
+          <input type="text" style="width: 50%;" id="handle" name="handle"></input>
           <br>
           <br>
-          <label for="password">Password:</label>
-          <input type="password" style="width: 38%;" id="password" name="password"></input>
+          <label for="password">Password</label>
+          <br>
+          <input type="password" style="width: 50%;" id="password" name="password"></input>
           <br>
           <br>
           <input type="submit" value="Login">

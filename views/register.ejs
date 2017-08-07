@@ -13,8 +13,8 @@
         <h2>Register</h2>
         <% if (messages) { %>
           <% for (key in messages) { %>
-            <div class="alert alert-<%= [key] %>">
-              <span style="color: black; border-size: 3px; border-color: black;"><%= messages[key] %></span>
+            <div class="alert-<%= [key] %>">
+              <span><%= messages[key] %></span>
             </div>
             <% } %>
             <br>
@@ -22,24 +22,32 @@
 
         <section class="user-registration">
         <form action="/register" method="POST" >
-          <label for="handle">Username:</label>
-          <input type="text" style="width: 40%;" id="handle" name="handle" placeholder="roy"></input>
+          <label for="handle">Username*</label>
+          <br>
+          <input type="text" style="width: 50%;" id="handle" name="handle" placeholder="roy"></input>
           <br>
           <br>
-          <label for="name">Name:</label>
-          <input type="text" style="width: 40%;" id="name" name="name" placeholder="Roy McRoyerson"></input>
+          <label for="name">Name*</label>
+          <br>
+          <input type="text" style="width: 50%;" id="name" name="name" placeholder="Roy McRoyerson"></input>
           <br>
           <br>
-          <label for="email">Email Address:</label>
-          <input type="text" style="width: 40%;" id="email" name="email" placeholder="roy@royco_roofing.com"></input>
+          <label for="email">Email Address*</label>
+          <br>
+          <input type="text" style="width: 50%;" id="email" name="email" placeholder="roy@royco_roofing.com"></input>
           <br>
           <br>
-          <label for="password">Password:</label>
-          <input type="password" style="width: 38%;" id="password" name="password"></input>
+          <label for="password">Password*</label>
+          <br>
+          <input type="password" style="width: 50%;" id="password" name="password"></input>
           <br>
           <br>
-          <label for="avatar">URL for Avatar:</label>
-          <input type="text" style="width: 50%;" id="avatar" name="avatar" placeholder="http://google.com/image.jpg"></input>
+          <label for="avatar">Avatar URL</label>
+          <br>
+          <input type="text" style="width: 75%;" id="avatar" name="avatar" placeholder="http://google.com/image.jpg"></input>
+          <br>
+          <br>
+          * Required fields
           <br>
           <br>
           <input type="submit" value="Register">
