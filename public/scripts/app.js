@@ -26,6 +26,16 @@ $(document).ready(function () {
     $(".new-tweet textarea").focus();
   })
 
+  $("#logout").on("click", () => {
+    $.post({
+      url: '/users/logout',
+      success: () => {
+        location.href = "/"
+      },
+      fail: handleError('logout')
+    })
+  });
+
   /**
   @description: error handler
   @params: method and error

@@ -9,7 +9,6 @@ const MONGODB_URI = process.env.MONGODB_URI;
 const bodyParser = require("body-parser");
 const cookieSession = require('cookie-session');
 const flash = require('express-flash');
-var path = require('path');
 
 const app = express();
 app.set("view engine", "ejs");
@@ -43,32 +42,24 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   app.use("/users", userRoutes);
 
   app.get("/", (req, res) => {
-    var user = req.session.user;
     let templateVars = {
-      user
+      user: req.session.user
     };
     res.render("index", templateVars);
   });
 
   app.get("/login", (req, res) => {
-    var user = req.session.user;
     let templateVars = {
-      user
+      user: req.session.user
     };
     res.render("login", templateVars)
   });
 
   app.get("/register", (req, res) => {
-    var user = req.session.user;
     let templateVars = {
-      user
+      user: req.session.user
     };
     res.render("register", templateVars)
-  });
-
-  app.get("/logout", (req, res) => {
-    req.session = null;
-    res.redirect("/");
   });
 
 });

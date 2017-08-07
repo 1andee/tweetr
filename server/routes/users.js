@@ -85,6 +85,11 @@ module.exports = function(DataHelpers) {
 
   });
 
+  userRoutes.post("/logout", (req, res) => {
+    req.session = null;
+    res.redirect("/");
+  });
+
   return userRoutes;
 
 }
