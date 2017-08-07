@@ -17,6 +17,17 @@ module.exports = function makeDataHelpers(db) {
            throw err;
          callback(null,tweets);
        });
+     },
+
+     // Save user in `db`
+     saveUser: function(user, callback) {
+       db.collection("users").save(user);
+       callback(null, true);
+     },
+
+     // Lookup user in `db`
+     getUser: function(handle, callback) {
+       db.collection("users").findOne({ "handle": handle }, callback);
      }
 
    };

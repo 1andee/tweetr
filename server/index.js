@@ -8,7 +8,6 @@ const MongoClient = require("mongodb").MongoClient;
 const MONGODB_URI = process.env.MONGODB_URI;
 const bodyParser = require("body-parser");
 const cookieSession = require('cookie-session');
-const bcrypt = require('bcrypt');
 const flash = require('express-flash');
 var path = require('path');
 
@@ -34,12 +33,14 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
   // Pass in `DataHelpers` object so it can define routes and interact with the data layer.
   const DataHelpers = require("./lib/data-helpers.js")(db);
   const tweetsRoutes = require("./routes/tweets.js")(DataHelpers);
+  const userRoutes = require("./routes/users.js")(DataHelpers);
 
   // Pass in `UserHelpers` object to generate random avatars
   const userHelper = require("./lib/util/user-helper")
 
-  // Mount the tweets routes at the "/tweets" path prefix:
+  // Mount the routes:
   app.use("/tweets", tweetsRoutes);
+  app.use("/users", userRoutes);
 
   app.get("/", (req, res) => {
     var user = req.session.user;
@@ -70,79 +71,8 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
     res.redirect("/");
   });
 
-  app.post("/register", (req, res) => {
-    if (!req.body.handle ||
-      !req.body.name   ||
-      !req.body.email  ||
-      !req.body.password) {
-        // Registration fields were left blank
-        req.flash('danger', "Please complete all required fields.");
-        return res.redirect("/register");
-      }
+});
 
-      let prefix = "@";
-      let userHandle = req.body.handle;
-      let cleanHandle = userHandle.replace("@", "");
-      let handle = prefix += cleanHandle;
-
-      const user = {
-        handle: handle,
-        name: req.body.name,
-        email: req.body.email,
-        password_digest: bcrypt.hashSync(req.body.password, 10),
-        avatars: {
-          small: req.body.avatar ? req.body.avatar : userHelper.generateRandomAvatar(),
-          regular: '',
-          large: ''
-        },
-        created_at: Date.now()
-      };
-
-      req.session.user = user;
-
-      db.collection("users").save(user);
-       return res.redirect('/');
-    });
-
-    app.post("/login", (req, res) => {
-      if (!req.body.handle ||
-        !req.body.password) {
-          // Username or password field was blank
-          req.flash('danger', "Please check your username and/or password.");
-          return res.redirect("/login");
-        };
-
-        let handle = `@${req.body.handle}`;
-
-        // Lookup user by email
-        db.collection("users").findOne({
-          'handle': handle
-        }, ((err, user)=> {
-          if (err) {
-            throw err
-          }
-          if (user) {
-            // User found in database
-            if (bcrypt.compareSync(req.body.password, user.password_digest)) {
-              // Password matches
-              req.session.user = user;
-              return res.redirect('/');
-            } else {
-              // Password doesn't match
-              req.flash('danger', "Please check your username and/or password.");
-              return res.redirect("/login");
-            }
-          } else {
-            // User doesn't exist
-            req.flash('danger', "Please check your username and/or password.");
-            return res.redirect("/login");
-          }
-        }));
-
-      });
-
-    });
-
-    app.listen(PORT, () => {
-      console.log("Tweeter app listening on port " + PORT);
-    });
+app.listen(PORT, () => {
+  console.log("Tweeter app listening on port " + PORT);
+});
