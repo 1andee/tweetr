@@ -5,8 +5,10 @@ Tweeter is a single-page web app built to practice front-end dev skills such as 
 http://tweetr-app.herokuapp.com
 
 ## Screenshots
-|[![alt text][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index_thumb.png "index page"]][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index.png]|[![alt text][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index_thumb.png "index page"]][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index.png]|
-|[![alt text][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index_thumb.png "index page"]][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index.png]|[![alt text][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index_thumb.png "index page"]][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index.png]|
+[![alt text][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index_thumb.png "index page"]][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index.png]
+[![alt text][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index_thumb.png "index page"]][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index.png]
+[![alt text][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index_thumb.png "index page"]][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index.png]
+[![alt text][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index_thumb.png "index page"]][https://raw.githubusercontent.com/1andee/tweetr/master/docs/index.png]
 
 ## Getting Started
 1. Fork and clone your fork of this repository.
