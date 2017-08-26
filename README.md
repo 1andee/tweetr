@@ -12,8 +12,6 @@ http://tweetr-app.herokuapp.com
 [![alt text](https://raw.githubusercontent.com/1andee/tweetr/master/docs/compose_thumb.png "Compose New Tweet")](https://raw.githubusercontent.com/1andee/tweetr/master/docs/compose.png)
 [![alt text](https://raw.githubusercontent.com/1andee/tweetr/master/docs/register_thumb.png "Registration Page")](https://raw.githubusercontent.com/1andee/tweetr/master/docs/register.png)
 
-<a href="https://raw.githubusercontent.com/1andee/tweetr/master/docs/index.png" target="_blank"><img src="https://raw.githubusercontent.com/1andee/tweetr/master/docs/index_thumb.png" alt="Index" width="320" height="191" border="2" /></a>
-
 ## Getting Started
 1. Fork and clone your fork of this repository.
 2. Install dependencies: `npm install` or `npm i` for short.
