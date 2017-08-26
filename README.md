@@ -7,10 +7,10 @@ After the project's core functionality was complete, additional login/registrati
 http://tweetr-app.herokuapp.com
 
 ## Screenshots
-Index Page[![alt text](https://raw.githubusercontent.com/1andee/tweetr/master/docs/index_thumb.png "Index")](https://raw.githubusercontent.com/1andee/tweetr/master/docs/index.png)
-Login Page[![alt text](https://raw.githubusercontent.com/1andee/tweetr/master/docs/login_thumb.png "Login Page")](https://raw.githubusercontent.com/1andee/tweetr/master/docs/login.png)
-Compose New Tweet[![alt text](https://raw.githubusercontent.com/1andee/tweetr/master/docs/compose_thumb.png "Compose New Tweet")](https://raw.githubusercontent.com/1andee/tweetr/master/docs/compose.png)
-Registration Page[![alt text](https://raw.githubusercontent.com/1andee/tweetr/master/docs/register_thumb.png "Registration Page")](https://raw.githubusercontent.com/1andee/tweetr/master/docs/register.png)
+[![alt text](https://raw.githubusercontent.com/1andee/tweetr/master/docs/index_thumb.png "Index")](https://raw.githubusercontent.com/1andee/tweetr/master/docs/index.png)
+[![alt text](https://raw.githubusercontent.com/1andee/tweetr/master/docs/login_thumb.png "Login Page")](https://raw.githubusercontent.com/1andee/tweetr/master/docs/login.png)
+[![alt text](https://raw.githubusercontent.com/1andee/tweetr/master/docs/compose_thumb.png "Compose New Tweet")](https://raw.githubusercontent.com/1andee/tweetr/master/docs/compose.png)
+[![alt text](https://raw.githubusercontent.com/1andee/tweetr/master/docs/register_thumb.png "Registration Page")](https://raw.githubusercontent.com/1andee/tweetr/master/docs/register.png)
 
 ## Getting Started
 1. Fork and clone your fork of this repository.
